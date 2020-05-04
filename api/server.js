@@ -29,10 +29,15 @@ const sessionConfig = {
     clearInterval: 3600 * 1000,
   }),
 };
+
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
 server.use(session(sessionConfig));
+
+server.get("/", (req, res) => {
+  res.send("hello World");
+});
 
 server.use("/api/auth", authRouter);
 server.use("/api/jokes", authenticate, jokesRouter);
