@@ -22,16 +22,20 @@ describe("test register and login endpoints", () => {
     });
   });
   //test login endpoint
-  describe("should test login endpoint", async () => {
-    it("should return return res.status(200) when registration happens");
-    const res = await request(server).post("/api/auth/login").send(user);
-    expect(res.status).toBe(200);
+
+  describe("should test login endpoint", () => {
+    it("should return res.status(200) when registration happens", async (done) => {
+      const res = await request(server).post("/api/auth/login").send(user);
+      expect(res.status).toBe(200);
+      done();
+    });
     it("should return a 401 credentials are not correct", async (done) => {
       const res = await request(server).post("/api/auth/login").send({
         username: "eri9c",
         password: "987654",
       });
       expect(res.status).toBe(401);
+      done();
     });
   });
 });
